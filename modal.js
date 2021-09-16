@@ -31,10 +31,12 @@ submit.addEventListener('submit', function(e)
   if(err)
   {
     throw err;
+    console.log('erreur trouvée');
 
   }
   else
   {
+    console.log('erreur non trouvée');
     const messagevalidation = document.createElement("p");
     let containerModal = document.getElementById("modal-body");
     containerModal.appendChild(messagevalidation);
