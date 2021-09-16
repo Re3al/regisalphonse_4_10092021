@@ -19,5 +19,27 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 function launchModal() {
   modalbg.style.display = "block";
 }
+//validation message
 
+
+
+//submit btn
+const submit = document.getElementById('submit');
+submit.addEventListener('submit', function(e)
+{
+  err = new Error;
+  if(err)
+  {
+    throw err;
+
+  }
+  else
+  {
+    const messagevalidation = document.createElement("p");
+    let containerModal = document.getElementById("modal-body");
+    containerModal.appendChild(messagevalidation);
+    messagevalidation.innerHTML = "Merci ! Votre réservation a été reçue";
+    messagevalidation.classList.add("messagevalide"); 
+  }
+});
 
