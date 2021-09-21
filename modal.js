@@ -24,9 +24,13 @@ function launchModal() {
 
 
 //submit btn
-const submit = document.getElementById('submit');
-submit.addEventListener('submit', function(e)
+const submit = document.getElementById("testtt");
+submit.addEventListener("click", function(e)
 {
+  e.preventDefault();
+  e.innerHTML = "testé";
+
+  /*
   err = new Error;
   if(err)
   {
@@ -42,6 +46,13 @@ submit.addEventListener('submit', function(e)
     containerModal.appendChild(messagevalidation);
     messagevalidation.innerHTML = "Merci ! Votre réservation a été reçue";
     messagevalidation.classList.add("messagevalide"); 
-  }
+  } */
 });
+
+
+const monsTest = document.getElementById("hero-headline");
+monsTest.addEventListener("click", function(e){
+      e.innerHTML= "element testé";
+});
+
 
