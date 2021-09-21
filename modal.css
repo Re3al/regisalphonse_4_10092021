@@ -67,9 +67,11 @@ img {
   display: none;
 }
 
-.messagevalide
+.form-answer
 {
-  color: green;
+  background-color: green;
+  width: 200px;
+  margin: auto;
 }
 
 @media screen and (max-width: 768px) {

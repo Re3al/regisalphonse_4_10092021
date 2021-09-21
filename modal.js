@@ -24,11 +24,16 @@ function launchModal() {
 
 
 //submit btn
+const answer = document.getElementById('form-answer');
 const submit = document.getElementById("testtt");
-submit.addEventListener("click", function(e)
+submit.addEventListener("submit", function(e)
 {
+  
+  answer.innerHTML ="Formulaire validé !";
   e.preventDefault();
-  e.innerHTML = "testé";
+
+  /*alert('Form envo');*/
+  
 
   /*
   err = new Error;
@@ -49,10 +54,5 @@ submit.addEventListener("click", function(e)
   } */
 });
 
-
-const monsTest = document.getElementById("hero-headline");
-monsTest.addEventListener("click", function(e){
-      e.innerHTML= "element testé";
-});
 
 
