@@ -25,34 +25,28 @@ function launchModal() {
 
 //submit btn
 const answer = document.getElementById('form-answer');
-const submit = document.getElementById("testtt");
-submit.addEventListener("submit", function(e)
-{
-  
-  answer.innerHTML ="Formulaire validé !";
-  e.preventDefault();
+document.forms["formInscription"].addEventListener('submit', function(e){
+  let error;
+  //récupère l'objet écouté 
+  let inputs = this;
+   for(i=0;i<inputs.length;i++)
+   {
+     if(!inputs[i].value)
+     {
+       error = "Veuillez renseigner tous les champs";
+       // break;
+     }
+   }
 
-  /*alert('Form envo');*/
-  
+   if(error)
+   {
+    e.preventDefault();
+    answer.innerHTML = error;
+    return false;
+   }
+   else{
+    answer.innerHTML ="Formulaire validé !";
+    e.preventDefault();
+   }
 
-  /*
-  err = new Error;
-  if(err)
-  {
-    throw err;
-    console.log('erreur trouvée');
-
-  }
-  else
-  {
-    console.log('erreur non trouvée');
-    const messagevalidation = document.createElement("p");
-    let containerModal = document.getElementById("modal-body");
-    containerModal.appendChild(messagevalidation);
-    messagevalidation.innerHTML = "Merci ! Votre réservation a été reçue";
-    messagevalidation.classList.add("messagevalide"); 
-  } */
 });
-
-
-
