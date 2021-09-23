@@ -73,6 +73,12 @@ img {
   width: 200px;
   margin: auto;
 }
+.form-error
+{
+  background-color: red;
+  width: 200px;
+  margin: auto;
+}
 
 @media screen and (max-width: 768px) {
   .topnav a {display: none;}
