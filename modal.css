@@ -79,6 +79,11 @@ img {
   width: 200px;
   margin: auto;
 }
+.error-message
+{
+  font-size: 10px;
+    color: #ff0000;
+}
 
 @media screen and (max-width: 768px) {
   .topnav a {display: none;}
