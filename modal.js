@@ -6,18 +6,26 @@ function editNav() {
     x.className = "topnav";
   }
 }
-
+console.log('test22');
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const closedBtn = document.getElementsByClassName('close')[0];
+
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+closedBtn.addEventListener("click", closeModal);
 
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+}
+//close modal
+function closeModal() {
+  modalbg.style.display = "none";
+  console.log('modal clicked');
 }
 //validation message
 
@@ -32,6 +40,13 @@ document.forms["formInscription"].addEventListener('submit', function(e){
   let indexError = 0;
   //récupère l'objet écouté 
   let inputs = this;
+
+  if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(!inputs['email'].value))
+  {  
+    error = "Veuillez renseigner une adresse email valide";
+    indexError = 2;
+    // break;
+  }
    for(i=0;i<inputs.length;i++)
    {
     lenghtName = inputs["last"].value;
@@ -44,10 +59,27 @@ document.forms["formInscription"].addEventListener('submit', function(e){
 
 
       }
+
+      lenghtFirstname = inputs["first"].value;
+    lenghtFirstname = lenghtFirstname.length;
+    
+      if(lenghtFirstname < 2)
+      {
+    error ="Veuillez entrer 2 caractères ou plus pour le champ du nom";
+    indexError = 0;
+      }
+
      if(!inputs[i].value)
      {
        error = "Veuillez renseigner tous les champs";
-       indexError = 0;
+       
+       // break;
+     }
+  
+     if((!inputs['quantity'].value))
+     {
+       error = "Vous devez saisir une valeur numérique";
+       indexError = 4;
        // break;
      }
      if(!inputs['location'].value)
