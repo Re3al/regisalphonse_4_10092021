@@ -40,15 +40,18 @@ document.forms["formInscription"].addEventListener('submit', function(e){
   let indexError = 0;
   //récupère l'objet écouté 
   let inputs = this;
+  //tableau des champs en erreurs 
+let errorIndex = []; 
+
 
   if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(!inputs['email'].value))
   {  
     error = "Veuillez renseigner une adresse email valide";
     indexError = 2;
+    errorIndex.push(2);
     // break;
   }
-   for(i=0;i<inputs.length;i++)
-   {
+  
     lenghtName = inputs["last"].value;
     lenghtName = lenghtName.length;
     
@@ -56,7 +59,7 @@ document.forms["formInscription"].addEventListener('submit', function(e){
       {
     error ="Veuillez entrer 2 caractères ou plus pour le champ du nom";
     indexError = 1;
-
+    errorIndex.push(1);
 
       }
 
@@ -65,59 +68,84 @@ document.forms["formInscription"].addEventListener('submit', function(e){
     
       if(lenghtFirstname < 2)
       {
-    error ="Veuillez entrer 2 caractères ou plus pour le champ du nom";
+    error ="Veuillez entrer 2 caractères ou plus pour le champ du prénom";
     indexError = 0;
+    errorIndex.push(0);
       }
 
-     if(!inputs[i].value)
-     {
-       error = "Veuillez renseigner tous les champs";
-       
-       // break;
-     }
   
      if((!inputs['quantity'].value))
      {
        error = "Vous devez saisir une valeur numérique";
        indexError = 4;
+       errorIndex.push(4);
        // break;
      }
      if(!inputs['location'].value)
      {
        error = "Vous devez choisir une option.";
        indexError = 5;
+       errorIndex.push(5);
        // break;
      }
      if(!inputs['birthdate'].value)
      {
        error = "Vous devez entrer votre date de naissance";
        indexError = 3;
+       errorIndex.push(3);
        // break;
      }
      if(document.querySelector('#checkbox1:checked') == null)
      {
        error = "Vous devez vérifier que vous acceptez les termes et conditions.";
        indexError = 6;
+       errorIndex.push(6);
        // break;
      }
-   }
+   
 
 
-   if(error)
+   if(errorIndex.length > 0)
    {
     e.preventDefault();
-    wrongAnswer.innerHTML = error;//code temporaire
     const blocInput = document.querySelectorAll('.modal-body .formData');
     //blocInput.style.border = "2px solid red";
-    const errorMessage = document.createElement("p");
+    /*const errorMessage = document.createElement("p");
+    console.log(blocInput[indexError]);
+    console.log(indexError);
+    blocInput[indexError].appendChild(errorMessage);
+    errorMessage.innerHTML = error;*/
+    blocInput.forEach( function (el,index)
+    {
+
+      const blocInput = document.querySelectorAll('.modal-body .formData');
+      let a = errorIndex.findIndex(function(value)
+      {
+        return value == index;
+      });
+
+      if(a >= 0)
+      {
+        targetInput = el.querySelector('input');
+        targetInput.classList.add("error-form");
+
+            /*const errorMessage = document.createElement("p");
     console.log(blocInput[indexError]);
     console.log(indexError);
     blocInput[indexError].appendChild(errorMessage);
     errorMessage.innerHTML = error;
-    errorMessage.classList.add('error-message');
+      }
+      else 
+      {
+        targetInput = el.querySelector('input');
+        targetInput.classList.remove("error-form");
+      }
+      
+      
+    });
+    //errorMessage.classList.add('error-message');
     //cibler l'input correspondant
-    targetInput = blocInput[indexError].querySelector('input');
-    targetInput.style.border = "2px solid red";
+   
 
 
     /*
