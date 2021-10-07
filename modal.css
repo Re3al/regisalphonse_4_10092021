@@ -88,6 +88,11 @@ img {
   font-size: 10px;
     color: #ff0000;
 }
+.test-message
+{
+  font-size: 10px;
+    color: orange;
+}
 
 @media screen and (max-width: 768px) {
   .topnav a {display: none;}
