@@ -37,6 +37,16 @@ const answer = document.getElementById('form-answer');
 const wrongAnswer = document.getElementById('form-error');
 document.forms["formInscription"].addEventListener('submit', function(e){
 let error = [];
+error[0] = "Veuillez entrer 2 caractères ou plus pour le champ du prénom";
+error[1] = "Veuillez entrer 2 caractères ou plus pour le champ du nom";
+error[2] = "Veuillez renseigner une adresse email valide";
+error[3] = "Vous devez entrer votre date de naissance";
+error[4] = "Vous devez saisir une valeur numérique";
+error[5] = "Vous devez sélectionner une option.";
+error[6] = "Vous devez vérifier que vous acceptez les termes et conditions.";
+
+
+
 //index de l'erreur
 let indexError = 0;
 //récupère l'objet écouté 
@@ -54,96 +64,98 @@ lenghtName = lenghtName.length;
 lenghtFirstname = inputs["first"].value;
 lenghtFirstname = lenghtFirstname.length;
 
+
 if(lenghtFirstname < 2)
 {
-error.push("Veuillez entrer 2 caractères ou plus pour le champ du prénom");
-indexError = 0;
-errorIndex.push(0);
+error[0];
 }
 
 
 
 if(lenghtName < 2)
 {
-error.push("Veuillez entrer 2 caractères ou plus pour le champ du nom");
-//indexError = 1;
-errorIndex.push(1);
+  error[1];//indexError = 1;
 
 }
 
   if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputs['email'].value))
   {  
-    error.push( "Veuillez renseigner une adresse email valide");
-    //indexError = 2;
-    errorIndex.push(2);
+    error[2];    //indexError = 2;
     // break;
   }
 
     
   if(!inputs['birthdate'].value)
   {
-    error.push( "Vous devez entrer votre date de naissance");
-      //indexError = 3;
-      errorIndex.push(3);
+    error[3];    
       // break;
   }
   
   if((!inputs['quantity'].value))
     {
-      error.push( "Vous devez saisir une valeur numérique");
-      //indexError = 4;
-      errorIndex.push(4);
+      error[4];      //indexError = 4;
       // break;
     }
   if(!inputs['location'].value)
   {
-    error.push( "Vous devez choisir une option.");
-    //indexError = 5;
-    errorIndex.push(5);
+    error[5];    //indexError = 5;
     // break;
   }
 
   if(document.querySelector('#checkbox1:checked') == null)
   {
-    error.push( "Vous devez vérifier que vous acceptez les termes et conditions.");
-    //indexError = 6;
-    errorIndex.push(6);
+    error[6];    //indexError = 6;
     // break;
   }
    
 
 
-  if(errorIndex.length > 0)
+  if(error.length > 0)
   {
     e.preventDefault();
     const blocInput = document.querySelectorAll('.modal-body .formData');
+    
+    //debut de la boucle
     blocInput.forEach( function (el,index){
-      console.log(index);
+      //console.log(index);
+    console.log(error.length);
+
+
       const blocInput = document.querySelectorAll('.modal-body .formData');
-      let a = errorIndex.findIndex(function(value)
+      let a = error.findIndex(function(value)
       {
-        return value == index;
+        return value;
       });
 
-      if(a >= 0)
-      {
-        console.log(a);
-        //console.log(a + "=>"+ error);
+      //index de l'input cible
+      b = indexOf(blocInput[index]);
+    
+
+
+      //let validInput = true;
+      function sendErrorMessage(){
         targetInput = el.querySelector('input');
-        targetInput.classList.add("error-form");
-        let errorMessage = document.createElement("p");
-        blocInput[a].appendChild(errorMessage);
-        errorMessage.classList.add("error-message");
-        errorMessage.innerHTML = error[a]; 
+              targetInput.classList.add("error-form");
+              let errorMessage = document.createElement("p");
+              blocInput[a].appendChild(errorMessage);
+              errorMessage.classList.add("error-message");
+              errorMessage.innerHTML = error[a]; 
+      }
+      if(a == b)
+      {
+        //console.log(a);
+        //console.log(a + "=>"+ error);
+        sendErrorMessage();       
       }
       else 
       {
-        targetInput = el.querySelector('input');
+        targetInputError = el.querySelector('input');
         targetInput.classList.remove("error-form");
         errorMessage.classList.remove("error-message");
         targetInput.removeChild(errorMessage);
+        //console.log(errorMessage);
         errorMessage.classList.add("test-message");
-        console.log(errorMessage + 'erreur résolue');
+        alert('Erreurs corrigée');
       }
     });
     return false;
