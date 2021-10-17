@@ -61,82 +61,77 @@ if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputs['email'].value))
 }
 
     
-  if(!inputs['birthdate'].value)
+if(!inputs['birthdate'].value)
+{
+  errors[3] = "Vous devez entrer votre date de naissance";
+}
+if((!inputs['quantity'].value))
   {
-    errors[3] = "Vous devez entrer votre date de naissance";
+    errors[4] = "Vous devez saisir une valeur numérique";
   }
-  
-  if((!inputs['quantity'].value))
+if(!inputs['location'].value)
+{
+  errors[5] = "Vous devez sélectionner une option.";
+}
+if(document.querySelector('#checkbox1:checked') == null)
+{
+  errors[6] = "Vous devez vérifier que vous acceptez les termes et conditions.";
+}
+//On vérifie qu'il n'y a pas d'erreurs
+if(errors.length > 0)
+{
+  e.preventDefault();
+  //div des inputs ciblés
+  let blockInput = document.querySelectorAll('.modal-body .formData');
+  //parcours l'ensemble des inputs
+  blockInput.forEach((input,index) => {
+  let errorParagraph = input.querySelector(".error-message");
+  //on supprime le message d'erreur s'il existait deja
+ if(errorParagraph)
+  {
+    errorParagraph.remove();
+  }
+  //si on a une erreur a un index donné parmi les index du tableau blockInput
+  if(errors[index])
     {
-      errors[4] = "Vous devez saisir une valeur numérique";
+      targetInput = input.querySelector('input');
+      targetInput.classList.add("error-form");
+      let errorMessage = document.createElement("p");
+      errorMessage.innerHTML = errors[index]; 
+      input.appendChild(errorMessage);
+      errorMessage.classList.add("error-message");
     }
-  if(!inputs['location'].value)
-  {
-    errors[5] = "Vous devez sélectionner une option.";
-  }
-
-  if(document.querySelector('#checkbox1:checked') == null)
-  {
-    errors[6] = "Vous devez vérifier que vous acceptez les termes et conditions.";
-  }
-   
-
-  //On vérifie qu'il n'y a pas d'erreurs
-  if(errors.length > 0)
-  {
-    e.preventDefault();
-    //div des inputs ciblés
-    let blockInput = document.querySelectorAll('.modal-body .formData');
-    //parcours l'ensemble des inputs
-    blockInput.forEach((input,index) => {
-    let errorParagraph = input.querySelector(".error-message");
-    //on supprime le message d'erreur s'il existait deja
-    if(errorParagraph)
+   else
     {
-      errorParagraph.remove();
+      targetInput = input.querySelector('input');
+      targetInput.classList.remove("error-form");
     }
-    //si on a une erreur a un index donné parmi les index du tableau blockInput
-    if(errors[index])
-      {
-        targetInput = input.querySelector('input');
-        targetInput.classList.add("error-form");
-        let errorMessage = document.createElement("p");
-        errorMessage.innerHTML = errors[index]; 
-        input.appendChild(errorMessage);
-        errorMessage.classList.add("error-message");
-      }
-      else
-      {
-        targetInput = input.querySelector('input');
-        targetInput.classList.remove("error-form");
-      }
 });
+}
+else{
+  /*
+  test
+  function sayThx() {
+    answer.innerHTML ="Merci ! Votre réservation a été reçue";
   }
-  else{
-    /*
-    function sayThx() {
-      answer.innerHTML ="Merci ! Votre réservation a été reçue";
-    }
-    */
+  */
 
-    const modalresponse = document.querySelector(".bground-response");
-    function launchResponse() {
-      modalresponse.style.display = "block";
-    }
+  const modalresponse = document.querySelector(".bground-response");
+  function launchResponse() {
+  modalresponse.style.display = "block";
+  }
     
     
-    e.preventDefault();
-    let formSubmitted = document.getElementById('formInscription');
-    formSubmitted.addEventListener("submit", function(e)
-    { 
-
-
-      closeModal();
-      launchResponse();
-      let btnCloseResponse = document.getElementById('close-btn');
-      function closeModalResponse() {
-        modalresponse.style.display = "none";
-      }
+  e.preventDefault();
+  let formSubmitted = document.getElementById('formInscription');
+  formSubmitted.addEventListener("submit", function(e)
+  { 
+    closeModal();
+    launchResponse();
+    let btnCloseResponse = document.getElementById('close-btn');
+    function closeModalResponse() {
+      modalresponse.style.display = "none";
+    }
       btnCloseResponse.addEventListener("click", closeModalResponse);
     });
   }
