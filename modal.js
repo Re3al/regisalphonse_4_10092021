@@ -52,7 +52,7 @@ let indexError = 0;
 //récupère l'objet écouté 
 let inputs = this;
 //tableau des champs en erreurs 
-let errorIndex = []; 
+let errors = []; 
 
 
   
@@ -67,58 +67,79 @@ lenghtFirstname = lenghtFirstname.length;
 
 if(lenghtFirstname < 2)
 {
-error[0];
+errors[0] = "Veuillez entrer 2 caractères ou plus pour le champ du prénom"; 
+
 }
 
 
 
 if(lenghtName < 2)
 {
-  error[1];//indexError = 1;
+  errors[1] = "Veuillez entrer 2 caractères ou plus pour le champ du nom";
 
 }
 
   if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputs['email'].value))
   {  
-    error[2];    //indexError = 2;
-    // break;
+    errors[2] = "Veuillez renseigner une adresse email valide";
   }
 
     
   if(!inputs['birthdate'].value)
   {
-    error[3];    
-      // break;
+    errors[3] = "Vous devez entrer votre date de naissance";
   }
   
   if((!inputs['quantity'].value))
     {
-      error[4];      //indexError = 4;
-      // break;
+      errors[4] = "Vous devez saisir une valeur numérique";
     }
   if(!inputs['location'].value)
   {
-    error[5];    //indexError = 5;
-    // break;
+    errors[5] = "Vous devez sélectionner une option.";
   }
 
   if(document.querySelector('#checkbox1:checked') == null)
   {
-    error[6];    //indexError = 6;
-    // break;
+    errors[6] = "Vous devez vérifier que vous acceptez les termes et conditions.";
   }
    
 
 
-  if(error.length > 0)
+  if(errors.length > 0)
   {
     e.preventDefault();
-    const blocInput = document.querySelectorAll('.modal-body .formData');
+    let blocInput = document.querySelectorAll('.modal-body .formData');
     
+    blocInput.forEach((input,index) => {
+    let errorParagraph = input.querySelector(".error-message");
+    if(errorParagraph)
+    {
+      errorParagraph.remove();
+    }
+    
+
+      if(errors[index])
+      {
+        input.classList.add("error-form");
+        let errorMessage = document.createElement("p");
+        errorMessage.innerHTML = errors[index]; 
+        input.appendChild(errorMessage);
+        errorMessage.classList.add("error-message");
+      }
+      else
+      {
+        input.classList.remove("error-form");
+      }
+
+
+} );
+
+
+
     //debut de la boucle
-    blocInput.forEach( function (el,index){
-      //console.log(index);
-    console.log(error.length);
+    /*blocInput.forEach( function (el,index){
+    
 
 
       const blocInput = document.querySelectorAll('.modal-body .formData');
@@ -157,7 +178,7 @@ if(lenghtName < 2)
         errorMessage.classList.add("test-message");
         alert('Erreurs corrigée');
       }
-    });
+    });*/
     return false;
   }
   else{
