@@ -12,7 +12,6 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closedBtn = document.getElementsByClassName('close')[0];
 
-
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 closedBtn.addEventListener("click", closeModal);
@@ -114,8 +113,31 @@ if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputs['email'].value))
 });
   }
   else{
-    answer.innerHTML ="Merci ! Votre réservation a été reçue";
-    //e.preventDefault();
-    alert('test');
+    /*
+    function sayThx() {
+      answer.innerHTML ="Merci ! Votre réservation a été reçue";
+    }
+    */
+
+    const modalresponse = document.querySelector(".bground-response");
+    function launchResponse() {
+      modalresponse.style.display = "block";
+    }
+    
+    
+    e.preventDefault();
+    let formSubmitted = document.getElementById('formInscription');
+    formSubmitted.addEventListener("submit", function(e)
+    { 
+
+
+      closeModal();
+      launchResponse();
+      let btnCloseResponse = document.getElementById('close-btn');
+      function closeModalResponse() {
+        modalresponse.style.display = "none";
+      }
+      btnCloseResponse.addEventListener("click", closeModalResponse);
+    });
   }
 });
