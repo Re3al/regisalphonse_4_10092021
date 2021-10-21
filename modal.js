@@ -128,7 +128,7 @@ else{
   { 
     closeModal();
     launchResponse();
-    let btnCloseResponse = document.getElementById('close-btn');
+    let btnCloseResponse = document.getElementsByClassName('close-btn');
     function closeModalResponse() {
       modalresponse.style.display = "none";
     }
