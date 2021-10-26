@@ -119,7 +119,6 @@ else{
    function closeModalResponse() {
     modalResponse.style.display = "none";
    }
-   //btnCloseResponse.addEventListener("click", closeModalResponse);
    btnCloseResponse.forEach((btnClose) => btnClose.addEventListener("click", closeModalResponse));
 
   });
