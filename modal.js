@@ -44,31 +44,27 @@ lenghtName = inputs["last"].value;
 lenghtName = lenghtName.length;
 lenghtFirstname = inputs["first"].value;
 lenghtFirstname = lenghtFirstname.length;
-
+//Listing des erreurs
 if(lenghtFirstname < 2)
 {
-errors[0] = "Veuillez entrer 2 caractères ou plus pour le champ du prénom"; 
+  errors[0] = "Veuillez entrer 2 caractères ou plus pour le champ du prénom"; 
 }
-
 if(lenghtName < 2)
 {
   errors[1] = "Veuillez entrer 2 caractères ou plus pour le champ du nom";
 }
-
 if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputs['email'].value))
 {  
   errors[2] = "Veuillez renseigner une adresse email valide";
-}
-
-    
+}    
 if(!inputs['birthdate'].value)
 {
   errors[3] = "Vous devez entrer votre date de naissance";
 }
 if((!inputs['quantity'].value))
-  {
-    errors[4] = "Vous devez saisir une valeur numérique";
-  }
+{
+  errors[4] = "Vous devez saisir une valeur numérique";
+}
 if(!inputs['location'].value)
 {
   errors[5] = "Vous devez sélectionner une option.";
@@ -87,52 +83,45 @@ if(errors.length > 0)
   blockInput.forEach((input,index) => {
   let errorParagraph = input.querySelector(".error-message");
   //on supprime le message d'erreur s'il existait deja
- if(errorParagraph)
+  if(errorParagraph)
   {
     errorParagraph.remove();
   }
   //si on a une erreur a un index donné parmi les index du tableau blockInput
   if(errors[index])
-    {
-      targetInput = input.querySelector('input');
-      targetInput.classList.add("error-form");
-      let errorMessage = document.createElement("p");
-      errorMessage.innerHTML = errors[index]; 
-      input.appendChild(errorMessage);
-      errorMessage.classList.add("error-message");
-    }
-   else
-    {
-      targetInput = input.querySelector('input');
-      targetInput.classList.remove("error-form");
-    }
+  {
+    targetInput = input.querySelector('input');
+    targetInput.classList.add("error-form");
+    let errorMessage = document.createElement("p");
+    errorMessage.innerHTML = errors[index]; 
+    input.appendChild(errorMessage);
+    errorMessage.classList.add("error-message");
+  }
+  else
+  {
+    targetInput = input.querySelector('input');
+    targetInput.classList.remove("error-form");
+  }
 });
 }
 else{
-  /*
-  test
-  function sayThx() {
-    answer.innerHTML ="Merci ! Votre réservation a été reçue";
-  }
-  */
-
-  const modalresponse = document.querySelector(".bground-response");
+  const modalResponse = document.querySelector(".bground-response");
   function launchResponse() {
-  modalresponse.style.display = "block";
-  }
-    
-    
+  modalResponse.style.display = "block";
+  } 
   e.preventDefault();
   let formSubmitted = document.getElementById('formInscription');
   formSubmitted.addEventListener("submit", function(e)
   { 
-    closeModal();
-    launchResponse();
-    let btnCloseResponse = document.getElementsByClassName('close-btn');
-    function  () {
-      modalresponse.style.display = "none";
-    }
-      btnCloseResponse.addEventListener("click", closeModalResponse);
-    });
+   closeModal();
+   launchResponse();
+   let btnCloseResponse = document.querySelectorAll('.close-btn');
+   function closeModalResponse() {
+    modalResponse.style.display = "none";
+   }
+   //btnCloseResponse.addEventListener("click", closeModalResponse);
+   btnCloseResponse.forEach((btnClose) => btnClose.addEventListener("click", closeModalResponse));
+
+  });
   }
 });
